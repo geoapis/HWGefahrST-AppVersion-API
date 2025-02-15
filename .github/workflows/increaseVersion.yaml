@@ -21,7 +21,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          token: ${{ secrets.WORKFLOW_GIT_ACCESS_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }} #${{ secrets.WORKFLOW_GIT_ACCESS_TOKEN }}
 
       - name: Read Current Versions
         id: read_versions
