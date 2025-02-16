@@ -26,8 +26,8 @@ jobs:
       - name: Read Current Versions
         id: read_versions
         run: |
-          android_version=$(jq -r '.android' appversion.json)
-          ios_version=$(jq -r '.ios' appversion.json)
+          android_version=$(jq -r '.Android' appversion.json)
+          ios_version=$(jq -r '.iOS' appversion.json)
           echo "current_android_version=$android_version" >> $GITHUB_ENV
           echo "current_ios_version=$ios_version" >> $GITHUB_ENV
 
@@ -44,7 +44,7 @@ jobs:
           new_android="${{ github.event.inputs.android || env.current_android_version }}"
           new_ios="${{ github.event.inputs.ios || env.current_ios_version }}"
           jq --arg android "$new_android" --arg ios "$new_ios" \
-            '.android = $android | .ios = $ios' appversion.json > tmp.$$.json && mv tmp.$$.json appversion.json
+            '.Android = $android | .iOS = $ios' appversion.json > tmp.$$.json && mv tmp.$$.json appversion.json
           git config --global user.name "${{ env.CI_COMMIT_AUTHOR }}"
           git config --global user.email "username@users.noreply.github.com"
           git add appversion.json
